@@ -23,12 +23,16 @@ function Register() {
         return {...err,PasswordErr:'Password must be six(6) or more characters'}
       })
     }
+    let users=[]
     if(errors.length==0){
-      const allData=JSON.stringify(user)
-      const userKey=JSON.stringify(user.Email)
-      localStorage.setItem(userKey,allData)
-      console.log('Saved, No Errors')
-      navigate("/")
+      if(localStorage.getItem('users')){
+       let  lUsers = localStorage.getItem('users')
+       users= JSON.parse(lUsers)
+      }
+      users.push(user)
+      const dataUsers=JSON.stringify(users)
+        localStorage.setItem('users', dataUsers)
+     
     }
   }
   return (

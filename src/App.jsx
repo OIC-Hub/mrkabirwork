@@ -18,21 +18,28 @@ import ContactPage from './pages/ContactPage'
 import Index from './pages/Index'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
-
+import { useState, createContext } from 'react'
+export const loggedIn = createContext()
+// export const users={}
 function App() {
+  const [isLoggedIn, setIsLoggedIn] =useState(false)
+    
+
   return (
+    <loggedIn.Provider value={[isLoggedIn, setIsLoggedIn]}>
    <main>
     <NavBar/>
     <Routes>
-      <Route path="/" element={<Index/>} />
+      <Route path="/" element={<Index isLoggedIn={isLoggedIn} />} />
       <Route path="/blog" element={<BlogPage/>} />
       <Route path="/about" element={<AboutPage/>} />
-      <Route path="/login" element={<LoginPage/>}/>
+      <Route path="/login" element={<LoginPage />}/>
       <Route path="/register" element={<RegisterPage/>}/>
       <Route path="/contact" element={<ContactPage/>}/>
       <Route path='/admin' element={<AdminPage/>}/>
     </Routes>
    </main>
+   </loggedIn.Provider>
   )
 }
 
